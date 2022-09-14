@@ -4,6 +4,8 @@
 
 --> The IDE used is VidualStudio Code.
 
+--> The source code files are index.html, style.css and script.js
+
 --> The weather data is fetched from https://openweathermap.org/ through API calls.
 
 --> The city-specific background images are fetched from https://source.unsplash.com/1600x900/?
