@@ -1,6 +1,7 @@
 let weather = {
   apiKey: "02850492ad83f5984b50a8dcda145c65",
   fetchWeather: function (city) {
+    this.loadCityImage(city);
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
@@ -33,24 +34,41 @@ let weather = {
     document.querySelector(".visibility").innerText =
       "Visibility: " + (visibility / 1000) + " km";
     document.querySelector(".weather").classList.remove("loading");
-    document.body.style.backgroundImage =
-      "url('https://source.unsplash.com/1600x900/?" + name + "')";
+
+    document.body.style.backgroundSize = `${screen.width}px ${screen.height}px`;
   },
-  search: function () {
-    this.fetchWeather(document.querySelector(".search-bar").value);
-  },
+  loadCityImage: function (city) {
+    let clientId = "oLBtwmlaPPPt_TaHi0eeWKWWAKCKGkTAqgNh_4KHK-c";
+    fetch("https://api.unsplash.com/photos/random/?query=" + city + "&orientation=landscape&client_id=" + clientId)
+      .then((response) => {
+        if (!response.ok) {
+          //alert("No image found.");
+          document.body.style.backgroundImage = "none";
+          throw new Error("No image found.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        document.body.style.backgroundImage = "url(" + data.urls.raw + ")";
+      });
+  }
 };
 
-document.querySelector(".search button").addEventListener("click", function () {
-  weather.search();
+let searchBarDiv = document.querySelector(".search-bar");
+let searchButtonDiv = document.querySelector(".search button");
+
+searchButtonDiv.addEventListener("click", function () {
+  weather.fetchWeather(searchBarDiv.value);
 });
 
-document
-  .querySelector(".search-bar")
-  .addEventListener("keyup", function (event) {
-    if (event.key == "Enter") {
-      weather.search();
-    }
-  });
+searchBarDiv.addEventListener("keyup", function (event) {
+  if (event.key == "Enter") {
+    weather.fetchWeather(searchBarDiv.value);
+  }
+});
+
+window.onload = () => {
+  searchBarDiv.value = "";
+}
 
 weather.fetchWeather("Delhi");
