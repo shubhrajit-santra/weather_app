@@ -2,7 +2,7 @@
 
 --> Designed an API based weather app called "WeatherNow" using HTML, CSS and JavaScript.
 
---> The IDE used is VidualStudio Code.
+--> The IDE used is VisualStudio Code.
 
 --> The source code files are index.html, style.css and script.js
 
