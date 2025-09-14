@@ -12,7 +12,7 @@
 
 --> When a query is made for a particular city, various weather-specific data such as temperature, humidity, wind speed, visibility, etc. are fetched and displayed for that city.
 
-## Website Link
+## Live Link
 http://weathernow.infinityfreeapp.com/
 
 ## UI Layout
